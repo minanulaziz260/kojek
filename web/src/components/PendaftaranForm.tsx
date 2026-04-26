@@ -29,19 +29,18 @@ export default function PendaftaranForm() {
     e.preventDefault();
     setTouched(true);
     if (!valid) return;
-    const message = [
+    const lines = [
       `Halo Admin PKBM Mugi Sae, saya ingin mendaftar program kesetaraan.`,
       ``,
       `Nama Lengkap: ${form.nama}`,
       `Umur: ${form.umur}`,
       `Nomor HP: ${form.nomor}`,
       `Jenjang: ${form.jenjang}`,
-      form.catatan ? `Catatan: ${form.catatan}` : "",
+      ...(form.catatan ? [`Catatan: ${form.catatan}`] : []),
       ``,
       `Mohon informasi lebih lanjut. Terima kasih.`,
-    ]
-      .filter(Boolean)
-      .join("\n");
+    ];
+    const message = lines.join("\n");
     const url = buildWaLink(message);
     window.open(url, "_blank", "noopener,noreferrer");
   }
